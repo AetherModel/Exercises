@@ -1,0 +1,21 @@
+name: C++ ex01a build, run, compare
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  run_and_compile:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Install g++
+      run: sudo apt-get install -y g++
+    - name: make
+      run: make all
+    - name: run file
+      run: ./C++/ex01a/ex01a.exe < C++/ex01a/ex01.input.txt > C++/ex01a/ex01.output.txt
+    - name: compare results
+      run: diff C++/ex01a/ex01.output.txt C++/ex01a/ex01.correct.output.txt
